@@ -29,6 +29,14 @@ docker build --no-cache -t overte/overte-server:2024.06.1-amd64 -f ./Dockerfile.
 docker run -d --name overte-server -p 40100-40102:40100-40102 -p 40100-40102:40100-40102/udp -p 48000-48006:48000-48006/udp -v $(pwd)/logs:/var/log -v $(pwd)/data:/root/.local/share/Overte --restart unless-stopped overte/overte-server:2024.06.1-amd64
 ```
 
+
+# Connection issues troubleshooting
+
+On some systems, using **host network** is required. Otherwise, it might lead to issues with getting stuck in the void or lost connection.
+
+- Docker cli example: add `--network=host`
+- Docker-compose example: add `network_mode: "host"`
+
 # Pushing a release
 
 When pushing a new release, don't forget to create a manifest that contains aarch64 and amd64:
